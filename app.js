@@ -11,13 +11,16 @@ function agregarAmigo() {
     //1. capturamos valor del imput
     const imputValue = imput.value;
 
-    //Validamos que el imput no este vacio
-    if(imputValue === "") {
-        alert('porfavor inserta un nombre');
-    }
-    //si no agregamos, lo capturado en el imput en el array
-    amigos.push(imputValue);
+    //Validamos que el imput no este vacio y que no acepte numeros
+    if(imputValue === "" || Number(imputValue)) {
+        alert('porfavor inserta datos correctos');
+    } else{
+        //si no agregamos, lo capturado en el imput en el array
+        amigos.push(imputValue);
 
+    }
+
+    
     //mandamos a llamar la funtion. actualizamos array y agregamos un nuevo elemento
     agregarElementos()
 
