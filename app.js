@@ -1,24 +1,40 @@
 //1. array para guardar amigos
 let amigos = [];
 
-//capturamos los value de los boton
+//capturamos el valor de los botones
 let imput = document.getElementById('amigo');
 let botonAñadir = document.getElementById('btn-añadir');
 let listaUl = document.getElementById('listaAmigos');
 
 //implementamos una funcion para agregar amigos
 function agregarAmigo() {
-    //1. capturamos valor del imput
-    const imputValue = imput.value;
+    //1. capturamos valor del imput y eliminamos espacios innecesarios
+    const imputValue = imput.value.trim();
 
-    //Validamos que el imput no este vacio y que no acepte numeros
-    if(imputValue === "" || Number(imputValue)) {
-        alert('porfavor inserta datos correctos');
-    } else{
-        //si no agregamos, lo capturado en el imput en el array
-        amigos.push(imputValue);
-
+    //2.Validamos que el imput no este vacio 
+    if(imputValue === "" ) {
+        alert('Por favor, inserta un nombre.')
+        return;
     }
+
+    //3. validamos que solo contengan letras y espacios (sin números ni simbolos)
+    if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(imputValue)) {
+        alert('El nombre solo puede contener letras y espacios. No se permiten números ni símbolos.');
+        //llamos a la funucion limpiar caja, despues que ingresaste algo incorrecto
+        limpiarCaja();
+        return;
+    }
+
+    //4. Validamos que el nombre no este duplicado en el array 
+    if(amigos.includes(imputValue)) {
+        alert('Ese nombre ya ah sido ingresado. No podemos agregar duplicados');
+        //llamos a la funucion limpiar caja, despues que ingresaste algo incorrecto y limpiar el imput
+        limpiarCaja();
+        return;
+    }
+
+    //5. si pasas todas las validaciones, agregamos el nombre al array
+    amigos.push(imputValue);
 
     
     //mandamos a llamar la funtion. actualizamos array y agregamos un nuevo elemento
